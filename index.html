@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TonyCut - Optimizador de Cortes Profesional</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            slate: {
+              850: '#151e2e',
+              950: '#020617',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar for Pro Look */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 4px;
+    }
+
+    .dark ::-webkit-scrollbar-thumb {
+      background: #475569;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #64748b;
+    }
+
+    @media print {
+      @page {
+        margin: 0.5cm;
+        size: auto;
+      }
+
+      /* OCULTAR TODO por defecto */
+      .no-print,
+      nav,
+      .input-panel,
+      [data-radix-popper-content-wrapper] {
+        display: none !important;
+      }
+
+      /* FORZAR BLANCO Y VISIBLE */
+      html,
+      body,
+      #root {
+        background: white !important;
+        overflow: visible !important;
+      }
+
+      /* --- MODO: IMPRIMIR TODO (Default) --- */
+      body:not(.print-summary) #summary-panel {
+        display: none !important;
+      }
+
+      body:not(.print-summary) #visualizer-container {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        page-break-inside: avoid !important;
+      }
+
+      body:not(.print-summary) #visualizer-container svg {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 85vh !important;
+      }
+
+      body:not(.print-summary) #visualizer-container>div {
+        page-break-after: always !important;
+        margin-bottom: 1cm !important;
+      }
+
+      body:not(.print-summary) #visualizer-container>div:last-child {
+        page-break-after: avoid !important;
+      }
+
+      /* --- MODO: IMPRIMIR RESUMEN --- */
+      body.print-summary #visualizer-container {
+        display: none !important;
+      }
+
+      body.print-summary #summary-panel {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        border: none !important;
+        overflow: visible !important;
+      }
+
+      body.print-summary #summary-panel h3 {
+        font-size: 16pt !important;
+        margin-bottom: 1cm !important;
+      }
+
+      body.print-summary #summary-panel table {
+        width: 100% !important;
+        font-size: 12pt !important;
+      }
+
+      body.print-summary #summary-panel th,
+      body.print-summary #summary-panel td {
+        padding: 0.2cm !important;
+        border-bottom: 1px solid #ddd !important;
+      }
+
+      /* TEXTO NEGRO PARA IMPRESIÓN */
+      text,
+      tspan,
+      h1,
+      h2,
+      h3,
+      h4,
+      p,
+      span,
+      div,
+      td,
+      th {
+        fill: #000000 !important;
+        color: #000000 !important;
+      }
+    }
+  </style>
+  <!-- Import Map (Solo para Playground - En local Vite lo ignora si usas main.tsx) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://aistudiocdn.com/react@^19.2.0",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+        "react/": "https://aistudiocdn.com/react@^19.2.0/",
+        "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+        "jspdf": "https://esm.sh/jspdf@2.5.1",
+        "html2canvas": "https://esm.sh/html2canvas@1.4.1"
+      }
+    }
+    </script>
+</head>
+
+<body class="bg-gray-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 overflow-hidden">
+  <div id="root"></div>
+  <!-- Script de entrada Vite (Asegúrate de que coincida con tu archivo local) -->
+  <script type="module" src="index.tsx"></script>
+</body>
+
+</html>
