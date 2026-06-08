@@ -74,7 +74,7 @@ const App: React.FC = () => {
     reader.readAsText(file); setIsFileMenuOpen(false); if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  const triggerPDFExport = () => { if (visualizerRef.current) { visualizerRef.current.handleDownloadPDF(); setIsFileMenuOpen(false); } else { alert("Calcula primero."); } };
+  const triggerPDFExport = () => { setIsFileMenuOpen(false); if (visualizerRef.current) { visualizerRef.current.handleDownloadPDF(); } else { alert("Calcula primero."); } };
   const handleSaveTemplate = () => { if (!newTemplateName.trim()) return; setTemplates(prev => [{ id: Date.now().toString(), name: newTemplateName, date: Date.now(), items: [...items], stock: [...stock] }, ...prev]); setNewTemplateName(''); };
   const handleLoadTemplate = (t: Template) => { setItems(t.items); setStock(t.stock); setShowTemplates(false); setResult(null); };
   const handleDeleteTemplate = (id: string) => { setTemplates(prev => prev.filter(t => t.id !== id)); };
@@ -91,12 +91,17 @@ const App: React.FC = () => {
 
   const handlePrintAll = () => {
     document.body.classList.remove('print-summary');
+    setIsFileMenuOpen(false);
     setTimeout(() => { window.print(); }, 200);
   };
 
   const handlePrintSummary = () => {
-    document.body.classList.add('print-summary');
-    setTimeout(() => { window.print(); document.body.classList.remove('print-summary'); }, 200);
+    setIsFileMenuOpen(false);
+    setTimeout(() => {
+      document.body.classList.add('print-summary');
+      window.print();
+      document.body.classList.remove('print-summary');
+    }, 200);
   };
 
   return (

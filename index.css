@@ -21,61 +21,73 @@
   background: #64748b; 
 }
 
-/* Estilos de Impresión Robustos */
+/* Estilos de Impresión */
 @media print {
   @page { margin: 1cm; size: auto; }
-  
-  /* Resetear layout */
+
   html, body, #root {
     height: auto !important;
     overflow: visible !important;
     background: white !important;
-    display: block !important;
   }
 
-  /* Ocultar UI innecesaria */
-  .no-print-ui, nav, .input-panel { 
-    display: none !important; 
-  }
-
-  /* Mostrar layout principal en bloque vertical */
-  .flex {
-    display: block !important;
-  }
-
-  /* Visualizador */
-  #visualizer-container {
-    width: 100% !important;
-    height: auto !important;
-    page-break-inside: avoid;
-    margin-bottom: 2rem;
-    overflow: visible !important;
-  }
-  
-  /* Hacer visibles los SVGs */
-  #visualizer-container svg {
-    max-height: none !important;
-    width: 100% !important;
-  }
-
-  /* Panel de Resumen (Tabla) */
+  /* Ocultar lo que no debe imprimirse */
+  .no-print-ui,
+  .no-print,
+  nav,
+  .input-panel,
   #summary-panel {
+    display: none !important;
+  }
+
+  /* El contenedor principal */
+  .overflow-hidden {
+    overflow: visible !important;
+  }
+
+  /* Visualizador ocupa todo el ancho */
+  #visualizer-container {
     display: block !important;
+    flex-direction: column !important;
     width: 100% !important;
-    border: none !important;
     height: auto !important;
     overflow: visible !important;
-    page-break-inside: auto;
+    gap: 0 !important;
   }
-  
-  /* Estilos específicos para la tabla impresa */
-  #summary-panel table {
-    border-collapse: collapse;
-    width: 100%;
-    font-size: 10pt;
+
+  #visualizer-container svg {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
   }
-  #summary-panel th, #summary-panel td {
-    border: 1px solid #ccc;
-    padding: 4px;
+
+  /* Cada board con salto de pagina */
+  #visualizer-container > div {
+    page-break-inside: avoid;
+    page-break-after: always;
+    margin: 0 auto 2cm;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  #visualizer-container > div:last-child {
+    page-break-after: avoid;
+  }
+
+  /* Modo solo resumen */
+  body.print-summary #visualizer-container > div > div:first-child {
+    display: none !important;
+  }
+  body.print-summary #visualizer-container .flex-1 {
+    display: none !important;
+  }
+  body.print-summary #visualizer-container > div > div:nth-child(2) > div:last-child {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+  body.print-summary #visualizer-container > div {
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
   }
 }

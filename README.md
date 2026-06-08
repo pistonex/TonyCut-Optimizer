@@ -4,7 +4,7 @@
 
 ## ✨ Características Principales
 
-*   **Optimización Inteligente:** Calcula la mejor disposición matemática para ubicar piezas dentro de los tableros base disponibles, minimizando el desperdicio de material general.
+*   **Optimización Inteligente:** Calcula la mejor disposición matemática para ubicar piezas dentro de los tableros base disponibles, minimizando el desperdicio de material general. Incluye modo **Quality** que prueba 3 estrategias de ordenamiento (área, lado más largo, perímetro) y elige la de mayor eficiencia.
 *   **Gestión de Materiales y Piezas:** Permite ingresar dimensiones (largo, ancho, cantidad) tanto de las piezas requeridas como del stock disponible de tableros.
 *   **Configuración Avanzada:**
     *   Soporte multidimensional (milímetros, centímetros y pulgadas).
@@ -29,6 +29,7 @@ El proyecto fue construido sobre una pila tecnológica (stack) moderna enfocada 
 
 *   **[React 19](https://react.dev/) / [TypeScript](https://www.typescriptlang.org/)**: Para un manejo estructurado, fuertemente tipado y componetizado del DOM.
 *   **[Vite](https://vitejs.dev/)**: Como sistema de dependencias dinámicas ultrarrápido (Build Tool).
+*   **[Vitest](https://vitest.dev/)**: Framework de tests unitarios para validar el algoritmo de optimización.
 *   **[Tailwind CSS](https://tailwindcss.com/)**: Framework para un estilado fácil de mantener, veloz y completamente responsivo a dispositivos variables.
 *   **[Lucide React](https://lucide.dev/)**: Para una iconografía consistente, estética y liviana.
 *   **[jsPDF](https://github.com/parallax/jsPDF) & [html2canvas](https://html2canvas.hertzen.com/)**: Motor de escaneo y dibujado visual orientado a renderizar las gráficas visuales en el explorador, emitiendo como salida un documento multipágina con calidad de impresión.
@@ -64,7 +65,13 @@ npm -v  # Debería imprimir tu versión de npm
    ```
    *La terminal te proporcionará la ruta local (típicamente `http://localhost:5173/`), ábrela en tu navegador para interactuar con la Web App.*
 
-4. **Compilar los artefactos para Producción (Opcional):**
+4. **Ejecutar tests unitarios (Opcional):**
+   Validación del algoritmo de optimización y utilidades:
+   ```bash
+   npm test
+   ```
+
+5. **Compilar los artefactos para Producción (Opcional):**
    Proceso dirigido a preparar el proyecto a fin de ser alojado (deployed) a un entorno real o servidor como Vercel, Netlify, o tu propio Hosting:
    ```bash
    npm run build
@@ -80,6 +87,7 @@ La codificación base del software reside en la raíz y subcarpetas principales:
     *   `Visualizer.tsx` : Motor de renderizado visual. Dibuja los rectángulos del material utilizando cálculos proporcionales al navegador (DOM).
 *   `/services/` : Capa de backend/abstracción desacoplada de React.
     *   `optimizer.ts` : Rutina pura y cruda conformada por algoritmos de empaquetado 2D (Bin Packing Math Algorithm) que logra encontrar el encaje computacionalmente más robusto en el panel base perimetral.
+    *   `optimizer.test.ts` : Suite de tests unitarios (Vitest) que validan el algoritmo con 15 casos, incluyendo verificación de no superposición entre piezas.
 *   `types.ts` : Diccionario conteniendo todas las estructuras, atributos en interfaces vitales que comparten todos los ficheros `.ts`/`.tsx` (TypeScript) del entorno de trabajo.
 
 ## 💡 Flujo de Trabajo (Cómo operar la aplicación)
