@@ -2,9 +2,7 @@ import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle } f
 import { UsedStock, Settings } from '../types';
 import { stringToColor } from '../services/optimizer';
 import { LayoutGrid, List, FileText } from 'lucide-react';
-// @ts-ignore
 import jsPDF from 'jspdf';
-// @ts-ignore
 import html2canvas from 'html2canvas';
 
 interface VisualizerProps {
@@ -37,11 +35,9 @@ export const Visualizer = forwardRef<VisualizerHandle, VisualizerProps>(({ usedS
     await new Promise(resolve => setTimeout(resolve, 100));
 
     try {
-      let handle;
+      let handle: FileSystemFileHandle | undefined;
       try {
-        // @ts-ignore
         if (window.showSaveFilePicker) {
-          // @ts-ignore
           handle = await window.showSaveFilePicker({
             suggestedName: 'tonycut-optimizacion.pdf',
             types: [{ description: 'PDF Document', accept: { 'application/pdf': ['.pdf'] } }],

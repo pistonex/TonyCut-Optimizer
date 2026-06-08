@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Settings as SettingsIcon, Layout, Save, Moon, Sun, Download, RefreshCcw, Calculator, Menu, FilePlus, FolderOpen, ChevronDown, ChevronRight, AlignHorizontalJustifyCenter, AlignVerticalJustifyCenter, Trash2, AlertTriangle, FileUp, FileDown, LayoutTemplate, Printer, FileText } from 'lucide-react';
+import { Settings as SettingsIcon, Layout, Save, Moon, Sun, RefreshCcw, Calculator, Menu, FilePlus, ChevronDown, ChevronRight, Trash2, AlertTriangle, FileUp, FileDown, LayoutTemplate, Printer, FileText } from 'lucide-react';
 import { CutItem, StockItem, Settings, OptimizationResult, Template } from './types';
 import { optimizeCuts } from './services/optimizer';
 import { InputForms } from './components/InputForms';
@@ -57,9 +57,7 @@ const App: React.FC = () => {
     const data = { items, stock, settings, darkMode, timestamp: Date.now() };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     try {
-      // @ts-ignore
       if (window.showSaveFilePicker) {
-        // @ts-ignore
         const handle = await window.showSaveFilePicker({ suggestedName: `tonycut-${new Date().toISOString().slice(0, 10)}.json`, types: [{ description: 'JSON Project', accept: { 'application/json': ['.json'] } }] });
         const writable = await handle.createWritable(); await writable.write(blob); await writable.close();
       } else { throw new Error("Fallback"); }

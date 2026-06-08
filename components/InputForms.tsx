@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Plus, Trash2, Upload, GripVertical, ChevronDown, ChevronRight, AlertCircle, X, FilePlus } from 'lucide-react';
+import { Plus, Trash2, Upload, GripVertical, ChevronDown, ChevronRight, AlertCircle, FilePlus } from 'lucide-react';
 import { CutItem, StockItem, Edges } from '../types';
 
 interface InputFormsProps {

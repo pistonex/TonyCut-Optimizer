@@ -1,4 +1,4 @@
-import { CutItem, StockItem, OptimizationResult, PlacedItem, UsedStock, Rect, Settings } from '../types';
+import { CutItem, StockItem, OptimizationResult, PlacedItem, UsedStock, Rect, Settings, Edges } from '../types';
 
 // Helper to determine if a piece fits in a free rect
 const fits = (pieceW: number, pieceH: number, freeRect: Rect) => {
@@ -34,7 +34,7 @@ export const optimizeCuts = (
     h: number; 
     area: number; 
     grain: boolean; 
-    edges: any; 
+    edges: Edges; 
     itemRef: CutItem 
   }[] = [];
 
